@@ -5,7 +5,7 @@ import os
 
 class GlfwConan(ConanFile):
     name = "Eigen3"
-    version = "3.3.1"
+    version = "3.3.2"
     license = "MPL2"
     url = "https://github.com/barcharcraz/conan-packages"
     settings = None
@@ -13,9 +13,9 @@ class GlfwConan(ConanFile):
 
     def source(self):
         zip_name = "eigen3-3.3.1.zip"
-        tools.download("http://bitbucket.org/eigen/eigen/get/3.3.1.zip", zip_name)
+        tools.download("http://bitbucket.org/eigen/eigen/get/3.3.2.zip", zip_name)
         tools.unzip(zip_name)
-        shutil.move("eigen-eigen-f562a193118d", "eigen3")
+        shutil.move("eigen-eigen-da9b4e14c255", "eigen3")
         os.unlink(zip_name)
 
     def build(self):
