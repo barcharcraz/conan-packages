@@ -12,7 +12,7 @@ class GlfwConan(ConanFile):
     generators = "cmake"
 
     def source(self):
-        zip_name = "eigen3-3.3.1.zip"
+        zip_name = "eigen3-3.3.2.zip"
         tools.download("http://bitbucket.org/eigen/eigen/get/3.3.2.zip", zip_name)
         tools.unzip(zip_name)
         shutil.move("eigen-eigen-da9b4e14c255", "eigen3")
@@ -27,3 +27,5 @@ class GlfwConan(ConanFile):
 
     def package_info(self):
         self.cpp_info.includedirs = ["include/eigen3"]
+        self.cpp_info.libdirs = []
+        self.cpp_info.bindirs = []
