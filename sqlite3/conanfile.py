@@ -5,7 +5,7 @@ import os
 import os.path
 class GlBindingConan(ConanFile):
     name = "sqlite3"
-    version = "3.16.2"
+    version = "3.17.0"
     description = "sqlite3 embedded database"
     license = "Public Domain"
     settings = "os", "compiler", "build_type", "arch"
@@ -14,7 +14,7 @@ class GlBindingConan(ConanFile):
     default_options = "shared=False"
     def source(self):
         zip_name = "sqlite-amalgamation-3160200.zip"
-        download("https://sqlite.org/2017/sqlite-amalgamation-3160200.zip", zip_name)
+        download("https://sqlite.org/2017/sqlite-amalgamation-3170000.zip", zip_name)
         unzip(zip_name)
         shutil.move("sqlite-amalgamation-3160200", "sqlite")
         os.unlink(zip_name)
