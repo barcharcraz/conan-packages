@@ -7,9 +7,9 @@ class Sqlpp11ConnectorSqlite3Conan(ConanFile):
     version = "0.23"
     license = "BSD"
     requires = (
-        ("HinnantDate/[~=2]@bartoc/testing"),
-        ("sqlite3/[~3]@bartoc/testing"),
-        ("sqlpp11/[~0]@bartoc/testing")
+        ("HinnantDate/[~=2]@barcharcraz/testing"),
+        ("sqlite3/[~3]@barcharcraz/testing"),
+        ("sqlpp11/[~0]@barcharcraz/testing")
     )
     url = "https://github.com/barcharcraz/conan-packages"
     settings = "os", "compiler", "build_type", "arch"

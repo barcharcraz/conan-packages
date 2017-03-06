@@ -7,7 +7,7 @@ class Sqlpp11Conan(ConanFile):
     version = "0.45"
     license = "BSD"
     requires = (
-        ("HinnantDate/[~=2]@bartoc/testing")
+        ("HinnantDate/[~=2]@barcharcraz/testing")
     )
     url = "https://github.com/barcharcraz/conan-packages"
     settings = "os", "compiler", "build_type", "arch"
@@ -26,7 +26,7 @@ class Sqlpp11Conan(ConanFile):
         cmake = CMake(self.settings)
         args = [f"-DBUILD_SHARED_LIBS={self.options.shared}",
                 f"-DCMAKE_INSTALL_PREFIX={self.package_folder}",
-                "-DENABLE_TESTS=ON"]
+                "-DENABLE_TESTS=OFF"]
         self.run(f"cmake . {cmake.command_line} {' '.join(args)}")
         self.run(f"cmake --build . {cmake.build_config}")
     def package(self):

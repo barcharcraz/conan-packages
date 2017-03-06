@@ -4,7 +4,7 @@ from conans.tools import download, unzip
 
 class LibtiffConan(ConanFile):
     name = "libtiff"
-    version = "4.0.6"
+    version = "4.0.7"
     generators = "cmake"
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False],
@@ -21,13 +21,13 @@ class LibtiffConan(ConanFile):
 
     def source(self):
         zip_name = self.ZIP_FOLDER_NAME + ".zip"
-        download("http://opengeosys.s3.amazonaws.com/ogs6-lib-sources/%s" % zip_name , zip_name)
+        download("https://github.com/vadz/libtiff/archive/Release-v4-0-7.zip", zip_name)
         unzip(zip_name)
         os.unlink(zip_name)
 
     def requirements(self):
         if self.options.jpeg == True:
-            self.requires("libjpeg-turbo/1.5.1@lasote/stable")
+            self.requires("libjpeg-turbo/1.5.1@barcharcraz/testing")
 
     def build(self):
         cmake = CMake(self.settings)
@@ -56,3 +56,4 @@ class LibtiffConan(ConanFile):
             self.cpp_info.libs = ["tiffd", "tiffxxd"]
         else:
             self.cpp_info.libs = ["tiff", "tiffxx"]
+        self.env_info.path.append(os.path.join(self.package_folder, "bin"))

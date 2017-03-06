@@ -13,10 +13,10 @@ class GlBindingConan(ConanFile):
     exports = "CMakeLists.txt"
     default_options = "shared=False"
     def source(self):
-        zip_name = "sqlite-amalgamation-3160200.zip"
+        zip_name = "sqlite-amalgamation-3170000.zip"
         download("https://sqlite.org/2017/sqlite-amalgamation-3170000.zip", zip_name)
         unzip(zip_name)
-        shutil.move("sqlite-amalgamation-3160200", "sqlite")
+        shutil.move("sqlite-amalgamation-3170000", "sqlite")
         os.unlink(zip_name)
 
     def build(self):
