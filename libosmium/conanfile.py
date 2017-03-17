@@ -11,7 +11,13 @@ class LibosmiumConan(ConanFile):
     options = {"shared": [True, False]}
     default_options = "shared=False"
     generators = "cmake"
-    requires = "Boost/devel@barcharcraz/testing"
+    requires = (
+        ("Boost/devel@barcharcraz/testing"),
+        ("gdal/2.1.3@barcharcraz/testing"),
+        ("proj/4.9.2@osechet/stable"),
+        ("expat/2.2.0@barcharcraz/testing"),
+        ("bzip2/1.0.6@lasote/stable")
+    )
     exports = "CMakeLists.txt"
 
     def source(self):
