@@ -120,7 +120,7 @@ cxx_14=False
             else:
                 options_poco += " -DPOCO_MT=OFF"
         options_poco += f" -DCMAKE_INSTALL_PREFIX={self.package_folder}"
-        conf_command = 'cd poco && cmake . %s -D%s' % (cmake.command_line, options_poco)
+        conf_command = 'cmake . %s -D%s' % (cmake.command_line, options_poco)
 
         self.output.warn(conf_command)
         self.run(conf_command)
@@ -151,7 +151,7 @@ cxx_14=False
         self.copy(pattern="*.dylib", dst="lib", src="poco/lib", keep_path=False)
         """
         cmake = CMake(self.settings)
-        self.run(f"cmake --build . --target install {cmake.build_config}")
+        self.run(f"cmake --build . --target install -DCMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_SKIP=ON {cmake.build_config}")
     def package_info(self):
         """ Define the required info that the consumers/users of this package will have
         to add to their projects
