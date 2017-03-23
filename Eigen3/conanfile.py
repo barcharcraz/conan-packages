@@ -8,7 +8,7 @@ class GlfwConan(ConanFile):
     version = "3.3.2"
     license = "MPL2"
     url = "https://github.com/barcharcraz/conan-packages"
-    settings = None
+    settings = "os", "compiler", "build_type", "arch"
     generators = "cmake"
 
     def source(self):
@@ -19,11 +19,15 @@ class GlfwConan(ConanFile):
         os.unlink(zip_name)
 
     def build(self):
-        pass
+        cmake = CMake(self.settings)
+        self.run(f"cmake eigen3 -DCMAKE_INSTALL_PREFIX={self.package_folder} {cmake.command_line}")
+        self.run(f"cmake --build . {cmake.build_config}")
 
     def package(self):
-        self.copy("*", "include/eigen3/Eigen", "eigen3/Eigen", keep_path=True)
-        self.copy("signature_of_eigen3_matrix_library", "include/eigen3", "eigen3")
+        cmake = CMake(self.settings)
+        self.run(f"cmake --build . --target install {cmake.build_config}")
+        #self.copy("*", "include/eigen3/Eigen", "eigen3/Eigen", keep_path=True)
+        #self.copy("signature_of_eigen3_matrix_library", "include/eigen3", "eigen3")
 
     def package_info(self):
         self.cpp_info.includedirs = ["include/eigen3"]

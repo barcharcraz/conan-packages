@@ -27,8 +27,8 @@ class ExpatConan(ConanFile):
         #expat tries to build docs in a system dependent way
         #this is fixed in HEAD but I'm patching it here so we can use the 2.2.0 release
         # TODO: remove hack with next expat update
-        if self.settings.os == "Windows":
-            tools.replace_in_file("expat/CMakeLists.txt", "add_custom_command", "#add_custom_command")
+        # we don't make this windows only because actually it fails on unix for out of source builds
+        tools.replace_in_file("expat/CMakeLists.txt", "add_custom_command", "#add_custom_command")
 
     def build(self):
         cmake = CMake(self.settings)

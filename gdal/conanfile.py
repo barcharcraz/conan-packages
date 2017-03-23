@@ -39,13 +39,15 @@ class GdalConan(ConanFile):
         shutil.move("gdal-2.1.3", "gdal")
         os.unlink(zip_name)
     def build(self):
-        nmake_args = self._getargs()
-        cmd = vcvars_command(self.settings)
-        self.run(f"{cmd} && cd gdal && nmake /f makefile.vc {' '.join(nmake_args)}")
+        if self.settings.os == "Windows":
+            nmake_args = self._getargs()
+            cmd = vcvars_command(self.settings)
+            self.run(f"{cmd} && cd gdal && nmake /f makefile.vc {' '.join(nmake_args)}")
     def package(self):
-        nmake_args = self._getargs()
-        cmd = vcvars_command(self.settings)
-        self.run(f"{cmd} && cd gdal && nmake /f makefile.vc {' '.join(nmake_args)} devinstall")
+        if self.settings.os == "Windows":
+            nmake_args = self._getargs()
+            cmd = vcvars_command(self.settings)
+            self.run(f"{cmd} && cd gdal && nmake /f makefile.vc {' '.join(nmake_args)} devinstall")
 
     def package_info(self):
         self.cpp_info.libs = ["gdal"]
