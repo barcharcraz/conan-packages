@@ -12,7 +12,7 @@ class LibosmiumConan(ConanFile):
     default_options = "shared=False"
     generators = "cmake"
     requires = (
-        ("Boost/devel@barcharcraz/testing"),
+        ("Boost/1.64.0b1@barcharcraz/testing"),
         ("gdal/2.1.3@barcharcraz/testing"),
         ("proj/4.9.2@osechet/stable"),
         ("expat/2.2.0@barcharcraz/testing"),

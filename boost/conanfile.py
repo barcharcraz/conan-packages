@@ -1,11 +1,12 @@
 from conans import ConanFile
 from conans import tools
-import platform, os, sys
+import platform, os, sys, shutil
+import urllib
 
 
 class BoostConan(ConanFile):
     name = "Boost"
-    version = "devel"
+    version = "1.64.0b1"
     settings = "os", "arch", "compiler", "build_type"
     FOLDER_NAME = "boost"
     # The current python option requires the package to be built locally, to find default Python implementation
@@ -119,9 +120,14 @@ class BoostConan(ConanFile):
             self.info.settings.clear()
 
     def source(self):
-        #zip_name = "%s.zip" % self.FOLDER_NAME if sys.platform == "win32" else "%s.tar.gz" % self.FOLDER_NAME
-        #url = "http://sourceforge.net/projects/boost/files/boost/%s/%s/download" % (self.version, zip_name)
-        self.run("git clone --recurse https://github.com/boostorg/boost.git")
+        download_url = "https://dl.bintray.com/boostorg/beta/1.64.0.beta.1/source/boost_1_64_0_b1.zip"
+        zip_name = "boost_1_64_0_b1.zip"
+        tools.download(download_url, zip_name)
+        tools.check_sha256(zip_name, "593005661af8dfe132b2b16bc2cd41339e6acd58456913f353d765090d7868f7")
+        tools.unzip(zip_name)
+        shutil.move("boost_1_64_0", "boost")
+        os.unlink(zip_name)
+        #self.run("git clone --recurse https://github.com/boostorg/boost.git")
 
     def build(self):
         if self.options.header_only:
@@ -217,11 +223,15 @@ class BoostConan(ConanFile):
 
         # JOIN ALL FLAGS
         b2_flags = " ".join(flags)
-
+        vstools = ""
+        if self.settings.os == "Windows" and self.settings.compiler == "Visual Studio":
+            vstools = tools.vcvars_command(self.settings)
+        if vstools != "": vstools += " && "
         command = "b2" if self.settings.os == "Windows" else "./b2"
-        self.run(f"cd {self.FOLDER_NAME} && {command} headers")
+        self.run(f"{vstools} cd {self.FOLDER_NAME} && {command} headers")
         without_python = "--without-python" if not self.options.python else ""
-        full_command = "cd %s && %s %s -j%s --abbreviate-paths %s" % (
+        full_command = "%s cd %s && %s %s -j%s --abbreviate-paths %s" % (
+            vstools,
             self.FOLDER_NAME,
             command,
             b2_flags,
