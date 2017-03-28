@@ -12,7 +12,6 @@ class LibosmiumConan(ConanFile):
     default_options = "shared=False"
     generators = "cmake"
     requires = (
-
     )
     exports = "CMakeLists.txt"
 
