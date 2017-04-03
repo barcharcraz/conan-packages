@@ -13,7 +13,7 @@ class CGALConanFile(ConanFile):
                "enable_gmp": [True, False]}
     default_options = "shared=False", "header_only=False", "enable_gmp=False"
     requires = (
-        ("Boost/1.64.0b1@barcharcraz/testing")
+        ("Boost/1.64.0b2@barcharcraz/testing")
     )
     generators = "cmake"
     exports = "CMakeLists.txt"
