@@ -25,6 +25,7 @@ class ProjConan(ConanFile):
 
     def build(self):
         # produced with `diff -U 1 -p Proj4Config.cmake tmp.cmake`
+
         patch_content1 = '''--- cmake/Proj4Config.cmake	2016-04-25 09:27:06.000000000 +0200
 +++ cmake/Proj4Config.cmake	2016-04-25 09:27:02.000000000 +0200
 @@ -38,2 +38,2 @@ set(PACKAGE_VERSION "${${PROJECT_INTERN_
@@ -41,6 +42,7 @@ class ProjConan(ConanFile):
 +if(FALSE)
    set(DEFAULT_BIN_SUBDIR bin)
 '''
+
         patch(patch_string=patch_content2, base_path=self.ZIP_FOLDER_NAME)
         cmake = CMake(self.settings)
         if self.settings.os == "Windows":

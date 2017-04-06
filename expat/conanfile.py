@@ -37,7 +37,8 @@ class ExpatConan(ConanFile):
                    f"-DBUILD_examples={self.options.examples}",
                    f"-DBUILD_tools={self.options.tools}",
                    f"-DBUILD_tests={self.options.tests}",
-                   f"-DCMAKE_INSTALL_PREFIX={self.package_folder}"]
+                   f"-DCMAKE_INSTALL_PREFIX={self.package_folder}",
+                   "-DCMAKE_DEBUG_POSTFIX=\"\""]
         self.run(f"cmake {self.name} {cmake.command_line} {' '.join(options)}")
         self.run("cmake --build . --target install %s" % cmake.build_config)
 
