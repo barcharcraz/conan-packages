@@ -3,7 +3,7 @@ from conans.tools import download, unzip
 import shutil
 import os
 import os.path
-class GlBindingConan(ConanFile):
+class Sqlite3Conan(ConanFile):
     name = "sqlite3"
     version = "3.17.0"
     description = "sqlite3 embedded database"
