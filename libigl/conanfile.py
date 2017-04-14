@@ -10,7 +10,7 @@ class LibiglConan(ConanFile):
     description = "libigl geometry library"
     author = "Charles Barto"
     license = "MPL"
-    settings = ()
+    settings = "os", "compiler", "build_type", "arch"
     options = {}
     exports = "CMakeLists.txt"
     generators = "cmake"
@@ -26,3 +26,6 @@ class LibiglConan(ConanFile):
     def package(self):
         cmake = CMake(self.settings)
         self.run(f"cmake --build . --target install {cmake.build_config}")
+    
+    def package_id(self):
+        self.info.settings.clear()
