@@ -43,5 +43,5 @@ class GeographicLibConan(ConanFile):
         cmake = CMake(self.settings)
         self.run(f"cmake --build . --target install {cmake.build_config}")
     
-    def package_id(self):
-        self.info.settings.clear()
+    #def package_id(self):
+    #    self.info.settings.clear()

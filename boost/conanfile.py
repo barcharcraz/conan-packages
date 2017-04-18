@@ -1,5 +1,7 @@
+
 from conans import ConanFile
 from conans import tools
+import sysconfig
 import platform, os, sys, shutil
 import urllib
 
@@ -135,11 +137,14 @@ class BoostConan(ConanFile):
             return
         command = "bootstrap" if self.settings.os == "Windows" else "./bootstrap.sh"
         flags = []
+        boot_flags = ""
+        if self.options.python:
+            boot_flags = f"--with-python-version={sysconfig.get_python_version()} --with-python-root={sysconfig.get_path('data')}"
         if self.settings.os == "Windows" and self.settings.compiler == "gcc":
             command += " mingw"
             flags.append("--layout=system")
         try:
-            self.run("cd %s && %s" % (self.FOLDER_NAME, command))
+            self.run("cd %s && %s %s" % (self.FOLDER_NAME, command, boot_flags))
         except:
             self.run("cd %s && type bootstrap.log" % self.FOLDER_NAME
                      if self.settings.os == "Windows"

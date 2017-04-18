@@ -16,13 +16,10 @@ class TriangleConan(ConanFile):
     default_options = "shared=False"
     generators = "cmake"
     def source(self):
-        zip_name = f"triangle.zip"
-        download(f"http://www.netlib.org/voronoi/triangle.zip", zip_name)
-        unzip(zip_name)
-        os.unlink(zip_name)
+        self.run("git clone https://github.com/libigl/triangle.git")
+        self.run("git -C triangle checkout d6761dd691e2e1318c83bf7773fea88d9437464a")
         # OK this one was a big huuuuge fuck you moment for me.
         # like can we just never do this ever again in the world
-        tools.replace_in_file("triangle.c", "#define VOID int", "#define VOID void")
     def build(self):
         cmake = CMake(self.settings)
         args = [f"-DCMAKE_INSTALL_PREFIX={self.package_folder}",
