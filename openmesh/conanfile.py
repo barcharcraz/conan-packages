@@ -21,7 +21,7 @@ class OpenMeshConan(ConanFile):
         os.unlink(zip_name)
     def build(self):
         cmake = CMake(self.settings)
-        args = [f"-DCMAKE_INSTALL_PREFIX={self.package_folder}",
+        args = [f'-DCMAKE_INSTALL_PREFIX="{self.package_folder}"',
                 f"-DBUILD_SHARED_LIBS={self.options.shared}",
                 "-DBUILD_APPS=OFF",
                 "-DOPENMESH_BUILD_PYTHON_BINDINGS=OFF",

@@ -25,7 +25,7 @@ class LibosmiumConan(ConanFile):
     def build(self):
         cmake = CMake(self.settings)
         cmake_options = [
-            f"-DCMAKE_INSTALL_PREFIX={self.package_folder}",
+            f'-DCMAKE_INSTALL_PREFIX="{self.package_folder}"',
             f"-DBUILD_SHARED_LIBS={self.options.shared}",
             f"-DBUILD_EXAMPLES=OFF",
             f"-DBUILD_TESTING=OFF",

@@ -22,7 +22,7 @@ class Sqlite3Conan(ConanFile):
     def build(self):
         cmake = CMake(self.settings)
         print(cmake.build_config)
-        args = [f"-DCMAKE_INSTALL_PREFIX={self.package_folder}",
+        args = [f'-DCMAKE_INSTALL_PREFIX="{self.package_folder}"',
                 f"-DBUILD_SHARED_LIBS={self.options.shared}"]
         self.run(f"cmake {self.conanfile_directory} {cmake.command_line} {' '.join(args)}")
         self.run(f"cmake --build . {cmake.build_config}")

@@ -20,7 +20,7 @@ class GlfwConan(ConanFile):
 
     def build(self):
         cmake = CMake(self.settings)
-        self.run(f"cmake eigen3 -DCMAKE_INSTALL_PREFIX={self.package_folder} {cmake.command_line}")
+        self.run(f"cmake eigen3 -DCMAKE_INSTALL_PREFIX=\"{self.package_folder}\" {cmake.command_line}")
         self.run(f"cmake --build . {cmake.build_config}")
 
     def package(self):

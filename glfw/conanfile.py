@@ -24,7 +24,7 @@ class GlfwConan(ConanFile):
     def build(self):
         cmake = CMake(self.settings)
         args = [f"-DBUILD_SHARED_LIBS={self.options.shared}",
-                f"-DCMAKE_INSTALL_PREFIX={self.package_folder}"]
+                f'-DCMAKE_INSTALL_PREFIX="{self.package_folder}"']
         self.run(f"cmake glfw {cmake.command_line} {' '.join(args)}")
         self.run(f"cmake --build . {cmake.build_config}")
 

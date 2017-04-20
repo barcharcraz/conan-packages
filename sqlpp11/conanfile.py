@@ -25,7 +25,7 @@ class Sqlpp11Conan(ConanFile):
     def build(self):
         cmake = CMake(self.settings)
         args = [f"-DBUILD_SHARED_LIBS={self.options.shared}",
-                f"-DCMAKE_INSTALL_PREFIX={self.package_folder}",
+                f'-DCMAKE_INSTALL_PREFIX="{self.package_folder}"',
                 "-DENABLE_TESTS=OFF"]
         self.run(f"cmake . {cmake.command_line} {' '.join(args)}")
         self.run(f"cmake --build . {cmake.build_config}")

@@ -28,7 +28,7 @@ class LibodbConan(ConanFile):
     def build(self):
         cmake = CMake(self.settings)
         cmake_options = [
-            f"-DCMAKE_INSTALL_PREFIX={self.package_folder}",
+            f'-DCMAKE_INSTALL_PREFIX="{self.package_folder}"',
             f"-DBUILD_SHARED_LIBS={self.options.shared}"
         ]
         self.run(f"cmake {self.conanfile_directory}/libodb-sqlite {cmake.command_line} {' '.join(cmake_options)}")

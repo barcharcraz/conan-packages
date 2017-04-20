@@ -19,7 +19,7 @@ class LibiglConan(ConanFile):
         self.run(f"git -C libigl checkout {self.version}")
     def build(self):
         cmake = CMake(self.settings)
-        args = [f"-DCMAKE_INSTALL_PREFIX={self.package_folder}"
+        args = [f'-DCMAKE_INSTALL_PREFIX="{self.package_folder}"'
                 ]
         self.run(f"cmake . {cmake.command_line} {' '.join(args)}")
         self.run(f"cmake --build . {cmake.build_config}")

@@ -33,7 +33,7 @@ class Sqlpp11ConnectorSqlite3Conan(ConanFile):
         self.output.info(date_include_path)
         self.output.info(sqlpp11_include_path)
         args = [f"-DBUILD_SHARED_LIBS={self.options.shared}",
-                f"-DCMAKE_INSTALL_PREFIX={self.package_folder}",
+                f'-DCMAKE_INSTALL_PREFIX="{self.package_folder}"',
                 "-DENABLE_TESTS=OFF",
                 f"-DDATE_INCLUDE_DIR={date_include_path}",
                 f"-DSQLPP11_INCLUDE_DIR={sqlpp11_include_path}"]

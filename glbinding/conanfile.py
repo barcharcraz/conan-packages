@@ -20,7 +20,7 @@ class GlBindingConan(ConanFile):
         print(cmake.build_config)
         args = ["-DOPTION_BUILD_TESTS=OFF",
                 "-DOPTION_BUILD_GPU_TESTS=OFF",
-                f"-DCMAKE_INSTALL_PREFIX={self.package_folder}",
+                f'-DCMAKE_INSTALL_PREFIX="{self.package_folder}"',
                 f"-DBUILD_SHARED_LIBS={self.options.shared}"]
         self.run(f"cmake {self.conanfile_directory}/glbinding {cmake.command_line} {' '.join(args)}")
         self.run(f"cmake --build . {cmake.build_config}")

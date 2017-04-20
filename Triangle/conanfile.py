@@ -22,7 +22,7 @@ class TriangleConan(ConanFile):
         # like can we just never do this ever again in the world
     def build(self):
         cmake = CMake(self.settings)
-        args = [f"-DCMAKE_INSTALL_PREFIX={self.package_folder}",
+        args = [f'-DCMAKE_INSTALL_PREFIX="{self.package_folder}"',
                 f"-DBUILD_SHARED_LIBS={self.options.shared}"
                 ]
         self.run(f"cmake . {cmake.command_line} {' '.join(args)}")

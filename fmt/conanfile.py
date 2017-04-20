@@ -26,7 +26,7 @@ class FmtConan(ConanFile):
     def build(self):
         cmake = CMake(self.settings)
         cmake_options = [
-            f"-DCMAKE_INSTALL_PREFIX={self.package_folder}",
+            f'-DCMAKE_INSTALL_PREFIX="{self.package_folder}"',
             f"-DBUILD_SHARED_LIBS={self.options.shared}",
             f"-DFMT_INSTALL=ON",
             f"-DFMT_TEST={self.options.tests}",

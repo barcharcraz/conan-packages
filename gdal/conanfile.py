@@ -30,7 +30,7 @@ class GdalConan(ConanFile):
                 # gdal recognises, but if compiles fine at least up
                 # to VS 2017
                 nmake_args.append("MSVC_VER=1900")
-        nmake_args.append(f"GDAL_HOME={self.package_folder}")
+        nmake_args.append(f'GDAL_HOME="{self.package_folder}"')
         return nmake_args
 
     def source(self):

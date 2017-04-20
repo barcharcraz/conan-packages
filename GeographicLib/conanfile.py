@@ -31,7 +31,7 @@ class GeographicLibConan(ConanFile):
         os.unlink("GeographicLib-1.48.zip")
     def build(self):
         cmake = CMake(self.settings)
-        args = [f"-DCMAKE_INSTALL_PREFIX={self.package_folder}",
+        args = [f'-DCMAKE_INSTALL_PREFIX="{self.package_folder}"',
                 f"-DBUILD_SHARED_LIBS={self.options.shared}",
                 f"-DGEOGRAPHICLIB_LIB_TYPE={'SHARED' if self.options.shared else 'STATIC'}",
                 "-DCMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_SKIP=ON",
