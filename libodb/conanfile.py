@@ -33,7 +33,7 @@ class LibodbConan(ConanFile):
     def package(self):
         cmake = CMake(self.settings)
         self.run(f"cmake --build . --target install {cmake.build_config}")
-        self.copy(pattern="odbConfig.cmake", src="", dst="share/odb")
+        #self.copy(pattern="odbConfig.cmake", src="", dst="share/odb")
     def package_info(self):
         self.cpp_info.libs = ["libodb"]
 

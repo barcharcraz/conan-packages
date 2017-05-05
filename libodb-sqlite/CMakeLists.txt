@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 project(libodb-sqlite VERSION 2.4.0 LANGUAGES CXX)
 include(../conanbuildinfo.cmake)
 conan_basic_setup()
-find_package(odb 2.4.0 REQUIRED COMPONENTS libodb)
+find_package(odb_libodb 2.4.0 REQUIRED COMPONENTS libodb)
 find_package(sqlite3 REQUIRED)
 set(LIBODB_INSTALL_HEADERS ON CACHE BOOL "Install the header files (a debug install)")
 file(GLOB_RECURSE libodb_src LIST_DIRECTORIES False

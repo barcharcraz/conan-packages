@@ -14,6 +14,11 @@ target_include_directories(libodb
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
 
 )
+set_property(TARGET libodb PROPERTY VERSION 2.4.0)
+include(CMakePackageConfigHelpers)
+write_basic_package_version_file(${CMAKE_CURRENT_BINARY_DIR}/odb_libodbConfigVersion.cmake
+    VERSION 2.4.0
+    COMPATIBILITY AnyNewerVersion)
 if(BUILD_SHARED_LIBS)
     target_compile_definitions(libodb PRIVATE
         -DLIBODB_DYNAMIC_LIB)
@@ -37,5 +42,7 @@ install(DIRECTORY odb DESTINATION include/
         PATTERN "*.txx"
 )
 endif()
-install(EXPORT odb_libodbConfig NAMESPACE odb:: COMPONENT libodb DESTINATION share/odb)
+install(EXPORT odb_libodbConfig NAMESPACE odb:: COMPONENT libodb DESTINATION share/odb_libodb)
 export(TARGETS libodb NAMESPACE odb:: FILE odb_libodbConfig.cmake)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/odb_libodbConfigVersion.cmake
+        DESTINATION share/odb_libodb)

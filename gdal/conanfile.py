@@ -10,7 +10,8 @@ class GdalConan(ConanFile):
     license = "MIT"
     url = "https://github.com/barcharcraz/conan-packages"
     settings = "os", "compiler", "build_type", "arch"
-    options = {}
+    options = {"shared": [True, False]}
+    default_options = "shared=false"
 
     def _getargs(self):
         nmake_args = ["WIN64=YES" if self.settings.arch == "x86_64" else "WIN64=NO",
@@ -49,6 +50,9 @@ class GdalConan(ConanFile):
             nmake_args = self._getargs()
             cmd = vcvars_command(self.settings)
             self.run(f"{cmd} {'&&' if cmd != '' else ''} cd gdal && nmake /f makefile.vc {' '.join(nmake_args)} devinstall")
+
+            if not self.options.shared:
+                self
 
     def package_info(self):
         self.cpp_info.libs = ["gdal"]
