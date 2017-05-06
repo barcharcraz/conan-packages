@@ -11,7 +11,7 @@ class GdalConan(ConanFile):
     url = "https://github.com/barcharcraz/conan-packages"
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False]}
-    default_options = "shared=false"
+    default_options = "shared=False"
 
     def _getargs(self):
         nmake_args = ["WIN64=YES" if self.settings.arch == "x86_64" else "WIN64=NO",
