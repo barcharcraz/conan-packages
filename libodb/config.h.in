@@ -1,0 +1,13 @@
+/* This file is automatically processed by configure. */
+
+#ifndef ODB_DETAILS_CONFIG_H
+#define ODB_DETAILS_CONFIG_H
+
+#cmakedefine ODB_THREADS_NONE
+#cmakedefine ODB_THREADS_POSIX
+#cmakedefine ODB_THREADS_WIN32
+#cmakedefine ODB_THREADS_TLS_KEYWORD
+#cmakedefine ODB_THREADS_TLS_DECLSPEC
+
+
+#endif /* ODB_DETAILS_CONFIG_H */

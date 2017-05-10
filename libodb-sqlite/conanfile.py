@@ -15,7 +15,7 @@ class LibodbConan(ConanFile):
         ("libodb/2.4.0@barcharcraz/testing"),
         ("sqlite3/3.17.0@barcharcraz/testing")
                 )
-    exports = ("CMakeLists.txt")
+    exports = ("CMakeLists.txt", "config.h.in")
 
     def source(self):
         zip_name = f"libodb-sqlite-{self.version}.zip"

@@ -11,7 +11,7 @@ class LibodbConan(ConanFile):
     options = {"shared": [True, False]}
     default_options = "shared=False"
     generators = "cmake"
-    exports = ("CMakeLists.txt", "odbConfig.cmake")
+    exports = ("CMakeLists.txt", "odbConfig.cmake", "config.h.in")
 
     def source(self):
         zip_name = f"libodb-{self.version}.zip"

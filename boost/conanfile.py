@@ -8,7 +8,7 @@ import urllib
 
 class BoostConan(ConanFile):
     name = "Boost"
-    version = "1.64.0b2"
+    version = "1.64.0"
     settings = "os", "arch", "compiler", "build_type"
     FOLDER_NAME = "boost"
     # The current python option requires the package to be built locally, to find default Python implementation
@@ -122,8 +122,8 @@ class BoostConan(ConanFile):
             self.info.settings.clear()
 
     def source(self):
-        download_url = "https://dl.bintray.com/boostorg/beta/1.64.0.beta.2/source/boost_1_64_0_b2.zip"
-        zip_name = "boost_1_64_0_b2.zip"
+        download_url = "https://dl.bintray.com/boostorg/release/1.64.0/source/boost_1_64_0.zip"
+        zip_name = "boost_1_64_0.zip"
         tools.download(download_url, zip_name)
         #tools.check_sha256(zip_name, "593005661af8dfe132b2b16bc2cd41339e6acd58456913f353d765090d7868f7")
         tools.unzip(zip_name)
@@ -138,8 +138,8 @@ class BoostConan(ConanFile):
         command = "bootstrap" if self.settings.os == "Windows" else "./bootstrap.sh"
         flags = []
         boot_flags = ""
-        if self.options.python:
-            boot_flags = f"--with-python-version={sysconfig.get_python_version()} --with-python-root={sysconfig.get_path('data')}"
+        #if self.options.python:
+        #    boot_flags = f"--with-python-version={sysconfig.get_python_version()} --with-python -d3 --with-python-root={sysconfig.get_path('data')}"
         if self.settings.os == "Windows" and self.settings.compiler == "gcc":
             command += " mingw"
             flags.append("--layout=system")
@@ -234,7 +234,7 @@ class BoostConan(ConanFile):
         if vstools != "": vstools += " && "
         command = "b2" if self.settings.os == "Windows" else "./b2"
         self.run(f"{vstools} cd {self.FOLDER_NAME} && {command} headers")
-        without_python = "--without-python" if not self.options.python else ""
+        without_python = "--without-python" if self.options.python else ""
         full_command = "%s cd %s && %s %s -j%s --abbreviate-paths %s" % (
             vstools,
             self.FOLDER_NAME,

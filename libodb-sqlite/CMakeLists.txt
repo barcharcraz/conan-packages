@@ -18,6 +18,10 @@ target_include_directories(libodb-sqlite
 )
 
 target_link_libraries(libodb-sqlite PRIVATE odb::libodb sqlite3)
+if(NOT MSVC)
+    configure_file("${CMAKE_BINARY_DIR}/config.h.in" "${CMAKE_CURRENT_SOURCE_DIR}/odb/sqlite/details/config.h")
+    set(CMAKE_INCLUDE_CURRENT_DIR ON)
+endif()
 if(BUILD_SHARED_LIBS)
     target_compile_definitions(libodb-sqlite PRIVATE
         -DLIBODB_SQLITE_DYNAMIC_LIB
