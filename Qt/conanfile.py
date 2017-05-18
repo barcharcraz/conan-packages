@@ -6,7 +6,7 @@ import os
 
 class QtConan(ConanFile):
     name = "Qt"
-    version = "5.9.0b3"
+    version = "5.9.0b4"
     description = "Qt GUI toolkit and library"
     license = "LGPL"
     settings = "os", "compiler", "build_type", "arch"
@@ -16,9 +16,9 @@ class QtConan(ConanFile):
 
     def source(self):
         zip_name = f"{self.name}-{self.version}.zip"
-        download("https://download.qt.io/development_releases/qt/5.9/5.9.0-beta3/single/qt-everywhere-opensource-src-5.9.0-beta3.zip", zip_name)
+        download("https://download.qt.io/development_releases/qt/5.9/5.9.0-beta4/single/qt-everywhere-opensource-src-5.9.0-beta4.zip", zip_name)
         unzip(zip_name)
-        shutil.move("qt-everywhere-opensource-src-5.9.0-beta3", "qt")
+        shutil.move("qt-everywhere-opensource-src-5.9.0-beta4", "qt")
         os.unlink(zip_name)
 
     def build(self):
