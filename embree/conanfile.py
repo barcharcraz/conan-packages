@@ -41,4 +41,4 @@ class EmbreeConan(ConanFile):
     def package(self):
         cmake = CMake(self.settings)
         self.run(f"cmake --build . --target install {cmake.build_config}")
-        self.copy("*.lib", ".", "lib")
+        self.copy("*.lib", src=".", dst="lib", keep_path=False)
