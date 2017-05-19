@@ -122,11 +122,11 @@ class BoostConan(ConanFile):
             self.info.settings.clear()
 
     def source(self):
-        download_url = "https://dl.bintray.com/boostorg/release/1.64.0/source/boost_1_64_0.zip"
-        zip_name = "boost_1_64_0.zip"
+        download_url = "https://dl.bintray.com/boostorg/release/1.64.0/source/boost_1_64_0.tar.gz"
+        zip_name = "boost_1_64_0.tar.gz"
         tools.download(download_url, zip_name)
         #tools.check_sha256(zip_name, "593005661af8dfe132b2b16bc2cd41339e6acd58456913f353d765090d7868f7")
-        tools.unzip(zip_name)
+        tools.untargz(zip_name)
         shutil.move("boost_1_64_0", "boost")
         os.unlink(zip_name)
         #self.run("git clone --recurse https://github.com/boostorg/boost.git")

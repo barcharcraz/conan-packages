@@ -8,7 +8,7 @@ project(PROJ4 C)
 set(PROJECT_INTERN_NAME PROJ)
 
 # added for conan package
-set(PROJ4_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/proj.4-4.9.2)
+set(PROJ4_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/proj.4-4.9.3)
 
 #################################################################################
 # PROJ4 CMake modules
@@ -26,7 +26,7 @@ colormsg(_HIBLUE_ "Configuring PROJ:")
 #PROJ version information
 #################################################################################
 include(Proj4Version)
-proj_version(MAJOR 4 MINOR 9 PATCH 2)
+proj_version(MAJOR 4 MINOR 9 PATCH 3)
 set(PROJ_API_VERSION "9")
 set(PROJ_BUILD_VERSION "10.0.1")
 
@@ -100,3 +100,4 @@ include_directories(${PROJ4_SOURCE_DIR}/src)
 
 # removed nad, man, cmake subdirs for conan package
 add_subdirectory(${PROJ4_SOURCE_DIR}/src)
+

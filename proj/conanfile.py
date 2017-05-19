@@ -6,7 +6,7 @@ from conans.tools import download, unzip, patch
 
 class ProjConan(ConanFile):
     name = "proj"
-    version = "4.9.2"
+    version = "4.9.3"
     generators = "cmake"
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False]}
