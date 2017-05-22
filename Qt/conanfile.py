@@ -1,6 +1,6 @@
 import conans
 from conans import tools, ConanFile, CMake
-from conans.tools import download, unzip, vcvars_command
+from conans.tools import download, unzip, vcvars_command, untargz
 import shutil
 import os
 
