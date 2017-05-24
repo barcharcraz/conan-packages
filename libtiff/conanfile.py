@@ -4,7 +4,7 @@ from conans.tools import download, unzip
 
 class LibtiffConan(ConanFile):
     name = "libtiff"
-    version = "4.0.7"
+    version = "4.0.8"
     generators = "cmake"
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False],
@@ -21,7 +21,7 @@ class LibtiffConan(ConanFile):
 
     def source(self):
         zip_name = self.ZIP_FOLDER_NAME + ".zip"
-        download("https://github.com/vadz/libtiff/archive/Release-v4-0-7.zip", zip_name)
+        download("https://github.com/vadz/libtiff/archive/Release-v4-0-8.zip", zip_name)
         unzip(zip_name)
         os.unlink(zip_name)
 

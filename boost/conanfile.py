@@ -122,14 +122,17 @@ class BoostConan(ConanFile):
             self.info.settings.clear()
 
     def source(self):
-        download_url = "https://dl.bintray.com/boostorg/release/1.64.0/source/boost_1_64_0.tar.gz"
-        zip_name = "boost_1_64_0.tar.gz"
-        tools.download(download_url, zip_name)
+        #download_url = "https://dl.bintray.com/boostorg/release/1.64.0/source/boost_1_64_0.tar.gz"
+        #zip_name = "boost_1_64_0.tar.gz"
+        #tools.download(download_url, zip_name)
         #tools.check_sha256(zip_name, "593005661af8dfe132b2b16bc2cd41339e6acd58456913f353d765090d7868f7")
-        tools.untargz(zip_name)
-        shutil.move("boost_1_64_0", "boost")
-        os.unlink(zip_name)
-        #self.run("git clone --recurse https://github.com/boostorg/boost.git")
+        #tools.untargz(zip_name)
+        #shutil.move("boost_1_64_0", "boost")
+        #os.unlink(zip_name)
+        self.run("git clone https://github.com/boostorg/boost.git")
+        self.run("git -C boost checkout boost-1.64.0")
+        self.run("git -C boost submodule init")
+        self.run("git -C boost submodule update")
 
     def build(self):
         if self.options.header_only:
@@ -154,7 +157,7 @@ class BoostConan(ConanFile):
         if self.settings.compiler == "Visual Studio":
             version = self.settings.compiler.version
             if version == 15:
-                version = "14.10"
+                version = "14.1"
             else:
                 version = f"{version}.0"
             flags.append("toolset=msvc-%s" % version)
@@ -305,6 +308,8 @@ class BoostConan(ConanFile):
             win_libs = []
             # http://www.boost.org/doc/libs/1_55_0/more/getting_started/windows.html
             visual_version = int(str(self.settings.compiler.version)) * 10
+            if self.settings.compiler.version == 15:
+                visual_version = 1410
             runtime = "mt"  # str(self.settings.compiler.runtime).lower()
 
             abi_tags = []
