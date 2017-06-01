@@ -6,7 +6,7 @@ import os
 
 class QtConan(ConanFile):
     name = "Qt"
-    version = "5.9.0rc2"
+    version = "5.9.0"
     description = "Qt GUI toolkit and library"
     license = "LGPL"
     settings = "os", "compiler", "build_type", "arch"
@@ -16,10 +16,13 @@ class QtConan(ConanFile):
 
     def source(self):
         zip_name = f"{self.name}-{self.version}.zip"
-        download("https://download.qt.io/development_releases/qt/5.9/5.9.0-rc2/single/qt-everywhere-opensource-src-5.9.0-rc2.zip", zip_name)
+        download("https://download.qt.io/official_releases/qt/5.9/5.9.0/single/qt-everywhere-opensource-src-5.9.0.zip", zip_name)
+        download("https://download.qt.io/official_releases/jom/jom_1_1_2.zip", "jom.zip")
+        unzip("jom.zip")
         #self.run("git clone -b v5.9.0-rc2 --recursive https://code.qt.io/qt/qt5.git qt")
         unzip(zip_name)
-        shutil.move("qt-everywhere-opensource-src-5.9.0-rc2", "qt")
+
+        shutil.move("qt-everywhere-opensource-src-5.9.0", "qt")
         os.unlink(zip_name)
 
     def build(self):
@@ -47,8 +50,12 @@ class QtConan(ConanFile):
 
         if self.settings.os == "Windows" and self.settings.compiler == "Visual Studio":
             cmd = vcvars_command(self.settings)
+
             self.run(f"{cmd} && cd Qt && configure {' '.join(args)}")
-            self.run(f"{cmd} && cd Qt && nmake")
+            if self.settings.compiler == "Visual Studio":
+                self.run(f"{cmd} && cd Qt && ..\jom.exe")
+            else:
+                self.run(f"{cmd} && cd Qt && make")
 
     def package(self):
         if self.settings.compiler == "Visual Studio":
