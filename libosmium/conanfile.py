@@ -4,7 +4,7 @@ import os
 
 class LibosmiumConan(ConanFile):
     name = "libosmium"
-    version = "2.11.1"
+    version = "2.11.3"
     license = "Boost"
     url = "https://github.com/barcharcraz/conan-packages"
     settings = "os", "compiler", "build_type", "arch"

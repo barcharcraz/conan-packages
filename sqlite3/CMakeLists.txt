@@ -9,7 +9,7 @@ else()
 endif()
 add_library(sqlite3 sqlite/sqlite3.c)
 add_executable(sqlite3_shell sqlite/shell.c sqlite/sqlite3.c)
-
+find_package(Threads REQUIRED)
 target_compile_definitions(sqlite3 PRIVATE 
     $<$<CONFIG:Debug>:-DSQLITE_DEBUG>
     ${API}
@@ -22,7 +22,8 @@ target_compile_definitions(sqlite3_shell PRIVATE
     -DSQLITE_ENABLE_UNLOCK_NOTIFY
     )
 target_include_directories(sqlite3 INTERFACE $<INSTALL_INTERFACE:include>)
-
+target_link_libraries(sqlite3 PRIVATE Threads::Threads ${CMAKE_DL_LIBS})
+target_link_libraries(sqlite3_shell PRIVATE Threads::Threads ${CMAKE_DL_LIBS})
 if(VCPKG_CMAKE_SYSTEM_NAME MATCHES "WindowsStore")
     target_compile_definitions(sqlite3 PRIVATE -DSQLITE_OS_WINRT=1)
 endif()

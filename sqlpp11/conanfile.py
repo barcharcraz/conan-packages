@@ -4,7 +4,7 @@ import os
 
 class Sqlpp11Conan(ConanFile):
     name = "sqlpp11"
-    version = "0.45"
+    version = "0.48"
     license = "BSD"
     requires = (
         ("HinnantDate/[~=2]@barcharcraz/testing")

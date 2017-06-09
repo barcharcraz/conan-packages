@@ -13,7 +13,8 @@ class GdalConan(ConanFile):
     options = {}
 
     def _getargs(self):
-        nmake_args = ["WIN64=YES" if self.settings.arch == "x86_64" else "WIN64=NO"]
+        nmake_args = ["WIN64=YES" if self.settings.arch == "x86_64" else "WIN64=NO",
+                      "DEBUG=YES" if self.settings.build_type == "Debug" else ""]
         if self.settings.compiler == "Visual Studio":
             version = self.settings.compiler.version
             if version == "9":
@@ -33,7 +34,7 @@ class GdalConan(ConanFile):
         return nmake_args
 
     def source(self):
-        zip_name = "gdal-2.1.2.zip"
+        zip_name = "gdal-2.1.3.zip"
         download("http://download.osgeo.org/gdal/2.1.3/gdal213.zip", zip_name)
         unzip(zip_name)
         shutil.move("gdal-2.1.3", "gdal")
@@ -47,6 +48,7 @@ class GdalConan(ConanFile):
         if self.settings.os == "Windows":
             nmake_args = self._getargs()
             cmd = vcvars_command(self.settings)
+            self.run(f"{cmd} && cd gdal && nmake /f makefile.vc {' '.join(nmake_args)} install")
             self.run(f"{cmd} && cd gdal && nmake /f makefile.vc {' '.join(nmake_args)} devinstall")
 
     def package_info(self):

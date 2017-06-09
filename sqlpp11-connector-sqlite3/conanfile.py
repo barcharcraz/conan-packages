@@ -4,7 +4,7 @@ import os
 
 class Sqlpp11ConnectorSqlite3Conan(ConanFile):
     name = "sqlpp11-connector-sqlite3"
-    version = "0.23"
+    version = "0.24"
     license = "BSD"
     requires = (
         ("HinnantDate/[~=2]@barcharcraz/testing"),
