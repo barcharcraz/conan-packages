@@ -12,11 +12,7 @@ class LibosmiumConan(ConanFile):
     default_options = "shared=False"
     generators = "cmake"
     requires = (
-        ("Boost/devel@barcharcraz/testing"),
-        ("gdal/2.1.3@barcharcraz/testing"),
-        ("proj/4.9.2@osechet/stable"),
-        ("expat/2.2.0@barcharcraz/testing"),
-        ("bzip2/1.0.6@lasote/stable")
+
     )
     exports = "CMakeLists.txt"
 
@@ -31,7 +27,15 @@ class LibosmiumConan(ConanFile):
         cmake = CMake(self.settings)
         cmake_options = [
             f"-DCMAKE_INSTALL_PREFIX={self.package_folder}",
-            f"-DBUILD_SHARED_LIBS={self.options.shared}"
+            f"-DBUILD_SHARED_LIBS={self.options.shared}",
+            f"-DBUILD_EXAMPLES=OFF",
+            f"-DBUILD_TESTING=OFF",
+            f"-DBUILD_BENCHMARKS=OFF",
+            f"-DBUILD_DATA_TESTS=OFF",
+            f"-DINSTALL_GDALCPP=OFF",
+            f"-DINSTALL_PROTOZERO=OFF",
+            f"-DINSTALL_UTFCPP=OFF",
+            f"-DBUILD_HEADERS=OFF"
         ]
         self.run(f"cmake {self.conanfile_directory} {cmake.command_line} {' '.join(cmake_options)}")
         self.run(f"cmake --build . --target install {cmake.build_config}")
