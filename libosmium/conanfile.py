@@ -12,6 +12,7 @@ class LibosmiumConan(ConanFile):
     default_options = "shared=False"
     generators = "cmake"
     requires = (
+        ("Boost/[>=1.64]@barcharcraz/testing")
     )
     exports = "CMakeLists.txt"
 
