@@ -4,9 +4,14 @@ include(conanbuildinfo.cmake)
 CONAN_BASIC_SETUP()
 find_package(OpenSSL REQUIRED)
 set(CMAKE_DEBUG_POSTFIX "d")
+if(WIN32)
 configure_file(${CMAKE_CURRENT_LIST_DIR}/postgresql/src/include/pg_config.h.win32 ${CMAKE_CURRENT_LIST_DIR}/postgresql/src/include/pg_config.h)
 configure_file(${CMAKE_CURRENT_LIST_DIR}/postgresql/src/include/pg_config_ext.h.win32 ${CMAKE_CURRENT_LIST_DIR}/postgresql/src/include/pg_config_ext.h)
 configure_file(${CMAKE_CURRENT_LIST_DIR}/postgresql/src/include/port/win32.h ${CMAKE_CURRENT_LIST_DIR}/postgresql/src/include/pg_config_os.h)
+elseif(POSIX)
+    configure_file(${CMAKE_CURRENT_LIST_DIR}/postgresql/include/pg_config.h.in ${CMAKE_CURRENT_LIST_DIR}/postgresql/src/include/pg_config.h)
+    configure_file(${CMAKE_CURRENT_LIST_DIR}/postgresql/include/pg_config_ext.h.in ${CMAKE_CURRENT_LIST_DIR}/postgresql/src/include/pg_config_ext.h)
+endif()
 file(WRITE postgresql/src/interfaces/libpq/pg_config_paths.h "#define SYSCONFDIR \"\"")
 set(INSTALL_INCLUDES ON CACHE BOOL "Install include files")
 set(pg_port_src
@@ -48,8 +53,6 @@ set(pg_libpq_src
     postgresql/src/interfaces/libpq/fe-secure.c
     postgresql/src/interfaces/libpq/libpq-events.c
     postgresql/src/interfaces/libpq/pqexpbuffer.c
-    postgresql/src/interfaces/libpq/pthread-win32.c
-    postgresql/src/interfaces/libpq/win32.c
     postgresql/src/interfaces/libpq/libpq-dist.rc
 )
 set(pg_libpq_interface
@@ -65,14 +68,20 @@ set(pg_libpq_catalog_interface
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_DEBUG_POSTFIX "d")
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-add_library(libpq ${pg_port_src} ${pg_backend_src} ${pg_libpq_src})
+add_library(libpq ${pg_backend_src} ${pg_libpq_src})
 target_compile_definitions(libpq PRIVATE -DFRONTEND -DENABLE_THREAD_SAFETY -DUSE_OPENSSL -D_CRT_SECURE_NO_WARNINGS)
 target_link_libraries(libpq PRIVATE ${OPENSSL_LIBRARIES} )
 if(WIN32)
+    target_sources(libpq PRIVATE
+        postgresql/src/interfaces/libpq/pthread-win32.c
+        postgresql/src/interfaces/libpq/win32.c
+        ${pg_port_src}
+        )
 target_link_libraries(libpq PRIVATE ws2_32 secur32 advapi32 shell32 crypt32)
-endif()
-target_include_directories(libpq PRIVATE ${OPENSSL_INCLUDE_DIRS} postgresql/src/include postgresql/src/include/port/win32 postgresql/src/include/port/win32_msvc postgresql/src/port)
+target_include_directories(libpq PRIVATE postgresql/src/include/port/win32 postgresql/src/include/port/win32_msvc postgresql/src/port)
 set_target_properties(libpq PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS ON)
+endif()
+target_include_directories(libpq PRIVATE ${OPENSSL_INCLUDE_DIRS} postgresql/src/include)
 
 install(TARGETS libpq
     ARCHIVE DESTINATION lib

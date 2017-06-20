@@ -38,7 +38,7 @@ class LibJpegTurboConan(ConanFile):
         # Don't mess with runtime conan already set
         replace_in_file("%s/CMakeLists.txt" % self.ZIP_FOLDER_NAME, 'string(REGEX REPLACE "/MD" "/MT" ${var} "${${var}}")', "")
         replace_in_file("%s/sharedlib/CMakeLists.txt" % self.ZIP_FOLDER_NAME, 'string(REGEX REPLACE "/MT" "/MD" ${var} "${${var}}")', "")
-
+        
         cmake_options = []
         if self.options.shared == True:
             cmake_options.append("-DENABLE_STATIC=0 -DENABLE_SHARED=1")

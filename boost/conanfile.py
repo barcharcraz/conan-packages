@@ -107,8 +107,8 @@ class BoostConan(ConanFile):
             if self.settings.os == "Linux" or self.settings.os == "Macos":
                 self.requires("bzip2/1.0.6@lasote/stable")
                 if not self.options.header_only:
-                    self.options["bzip2/1.0.6"].shared = self.options.shared
-            self.requires("zlib/1.2.8@lasote/stable")
+                    self.options["bzip2"].shared = self.options.shared
+            self.requires("zlib/1.2.11@lasote/stable")
             if not self.options.header_only:
                 self.options["zlib"].shared = self.options.shared
 
@@ -237,7 +237,7 @@ class BoostConan(ConanFile):
         if vstools != "": vstools += " && "
         command = "b2" if self.settings.os == "Windows" else "./b2"
         self.run(f"{vstools} cd {self.FOLDER_NAME} && {command} headers")
-        without_python = "--without-python" if self.options.python else ""
+        without_python = "--without-python" if not self.options.python else ""
         full_command = "%s cd %s && %s %s -j%s --abbreviate-paths %s" % (
             vstools,
             self.FOLDER_NAME,

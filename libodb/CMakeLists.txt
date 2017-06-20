@@ -4,7 +4,11 @@ set(LIBODB_INSTALL_HEADERS ON CACHE BOOL "Install the header files (a debug inst
 file(GLOB_RECURSE libodb_src LIST_DIRECTORIES False
     RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
     *.cxx)
+if(WIN32)
 list(FILTER libodb_src EXCLUDE REGEX /posix/.*)
+else()
+list(FILTER libodb_src EXCLUDE REGEX /win32/.*)
+endif()
 message(INFO ${libodb_src})
 add_library(libodb ${libodb_src})
 

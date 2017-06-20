@@ -11,7 +11,7 @@ class LibtiffConan(ConanFile):
                "jpeg": [True, False]
                }
     default_options = "shared=False", "jpeg=False", "libjpeg-turbo:shared=True"
-    requires = "zlib/1.2.8@lasote/stable"
+    requires = "zlib/[>=1.2.8]@lasote/stable"
     exports = ["CMakeLists.txt", "FindTIFF.cmake"]
     url="http://github.com/bilke/conan-tiff"
     license="http://www.remotesensing.org/libtiff/"

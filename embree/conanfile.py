@@ -33,8 +33,9 @@ class EmbreeConan(ConanFile):
             "-DEMBREE_ISPC_SUPPORT=OFF",
             "-DEMBREE_MAX_ISA=SSE2",
             "-DEMBREE_GEOMETRY_SUBDIV=OFF",
-            "-DEMBREE_STATIC_RUNTIME=ON" if "MT" in str(self.settings.compiler.runtime) else "-DEMBREE_STATIC_RUNTIME=OFF"
         ]
+        if self.settings.os == "Windows":
+            cmake_opts.append("-DEMBREE_STATIC_RUNTIME=ON" if "MT" in str(self.settings.compiler.runtime) else "-DEMBREE_STATIC_RUNTIME=OFF")
         self.run(f"cmake {self.name} {' '.join(cmake_opts)} {cmake.command_line}")
         self.run(f"cmake --build . {cmake.build_config}")
     
