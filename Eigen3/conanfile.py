@@ -5,17 +5,17 @@ import os
 
 class GlfwConan(ConanFile):
     name = "Eigen3"
-    version = "3.3.3"
+    version = "3.3.4"
     license = "MPL2"
     url = "https://github.com/barcharcraz/conan-packages"
     settings = "os", "compiler", "build_type", "arch"
     generators = "cmake"
 
     def source(self):
-        zip_name = "eigen3-3.3.3.zip"
-        tools.download("http://bitbucket.org/eigen/eigen/get/3.3.3.zip", zip_name)
+        zip_name = "eigen3-3.3.4.zip"
+        tools.download("http://bitbucket.org/eigen/eigen/get/3.3.4.zip", zip_name)
         tools.unzip(zip_name)
-        shutil.move("eigen-eigen-67e894c6cd8f", "eigen3")
+        shutil.move("eigen-eigen-5a0156e40feb", "eigen3")
         os.unlink(zip_name)
 
     def build(self):

@@ -5,7 +5,7 @@ import os
 
 class EmbreeConan(ConanFile):
     name = "embree"
-    version = "2.15.0"
+    version = "2.16.4"
     license = "Apache 2.0"
     description = "The embree ray tracing library"
     url = "https://github.com/barcharcraz/conan-packages"
