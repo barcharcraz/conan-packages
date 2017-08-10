@@ -109,7 +109,7 @@ class BoostConan(ConanFile):
                 self.requires("bzip2/1.0.6@lasote/stable")
                 if not self.options.header_only:
                     self.options["bzip2"].shared = self.options.shared
-            self.requires("zlib/1.2.11@lasote/stable")
+            self.requires("zlib/1.2.11@conan/stable")
             if not self.options.header_only:
                 self.options["zlib"].shared = self.options.shared
 
@@ -123,17 +123,17 @@ class BoostConan(ConanFile):
             self.info.settings.clear()
 
     def source(self):
-        #download_url = "https://dl.bintray.com/boostorg/release/1.64.0/source/boost_1_64_0.tar.gz"
-        #zip_name = "boost_1_64_0.tar.gz"
-        #tools.download(download_url, zip_name)
-        #tools.check_sha256(zip_name, "593005661af8dfe132b2b16bc2cd41339e6acd58456913f353d765090d7868f7")
-        #tools.untargz(zip_name)
-        #shutil.move("boost_1_64_0", "boost")
-        #os.unlink(zip_name)
-        self.run("git clone https://github.com/boostorg/boost.git")
-        self.run("git -C boost checkout boost-1.64.0")
-        self.run("git -C boost submodule init")
-        self.run("git -C boost submodule update")
+        download_url = "https://dl.bintray.com/boostorg/release/1.64.0/source/boost_1_64_0.tar.gz"
+        zip_name = "boost_1_64_0.tar.gz"
+        tools.download(download_url, zip_name)
+        tools.check_sha256(zip_name, "0445c22a5ef3bd69f5dfb48354978421a85ab395254a26b1ffb0aa1bfd63a108")
+        tools.untargz(zip_name)
+        shutil.move("boost_1_64_0", "boost")
+        os.unlink(zip_name)
+        #self.run("git clone https://github.com/boostorg/boost.git")
+        #self.run("git -C boost checkout boost-1.64.0")
+        #self.run("git -C boost submodule init")
+        #self.run("git -C boost submodule update")
 
     def build(self):
         if self.options.header_only:
