@@ -6,7 +6,7 @@ import shutil
 
 class LibiglConan(ConanFile):
     name = "libigl"
-    version = "2bc57eb"
+    version = "4a598a2effc2db41d22df42a8dfb4390f7195391"
     description = "libigl geometry library"
     author = "Charles Barto"
     license = "MPL"
