@@ -14,6 +14,9 @@ class CarveConanFile(ConanFile):
     default_options = "shared=False"
     generators = "cmake"
     exports = "CMakeLists.txt"
+    description = "The CARVE CSG library"
+    url = "https://github.com/barcharcraz/conan-packages"
+
 
     def source(self):
         zip_name = f"{self.name}-{self.version}.zip"

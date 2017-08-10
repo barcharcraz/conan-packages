@@ -6,8 +6,9 @@ import os
 
 class FmtConan(ConanFile):
     name = "fmt"
-    version = "3.0.1"
+    version = "4.0.0"
     license = "BSD"
+    description = "a c++ safe and fast formating library"
     url = "https://github.com/barcharcraz/conan-packages"
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False],

@@ -13,6 +13,8 @@ class ProjConan(ConanFile):
     default_options = "shared=False"
     exports = ["CMakeLists.txt", "FindPROJ4.cmake"]
     license="https://github.com/OSGeo/proj.4"
+    description = "The Proj library for projecting things"
+    url = "https://github.com/barcharcraz/conan-packages"
 
     ZIP_FOLDER_NAME = "proj.4-%s" % version
     INSTALL_DIR = "_install"

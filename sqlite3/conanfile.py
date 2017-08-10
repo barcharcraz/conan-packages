@@ -6,6 +6,8 @@ import os.path
 class Sqlite3Conan(ConanFile):
     name = "sqlite3"
     version = "3.17.0"
+    url = "https://github.com/barcharcraz/conan-packages"
+
     description = "sqlite3 embedded database"
     license = "Public Domain"
     settings = "os", "compiler", "build_type", "arch"

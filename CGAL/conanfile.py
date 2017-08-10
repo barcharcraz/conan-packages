@@ -17,6 +17,8 @@ class CGALConanFile(ConanFile):
     )
     generators = "cmake"
     exports = "CMakeLists.txt"
+    url = "https://github.com/barcharcraz/conan-packages"
+
 
     def source(self):
         zip_name = f"{self.name}-{self.version}.zip"

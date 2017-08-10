@@ -80,6 +80,7 @@ class BoostConan(ConanFile):
 
     url = "https://github.com/barcharcraz/conan-packages"
     license = "Boost Software License - Version 1.0. http://www.boost.org/LICENSE_1_0.txt"
+    description = "The boost c++ libraries"
     short_paths = True
 
     def config_options(self):
