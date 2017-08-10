@@ -4,15 +4,15 @@ import shutil
 import os
 class GlBindingConan(ConanFile):
     name = "glBinding"
-    version = "2.1.1"
+    version = "2.1.3"
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False]}
     default_options = "shared=False"
     def source(self):
-        zip_name = "glbinding-2.1.1.zip"
-        download("https://github.com/cginternals/glbinding/archive/v2.1.1.zip", zip_name)
+        zip_name = "glbinding-2.1.3.zip"
+        download("https://github.com/cginternals/glbinding/archive/v2.1.3.zip", zip_name)
         unzip(zip_name)
-        shutil.move("glbinding-2.1.1", "glbinding")
+        shutil.move("glbinding-2.1.3", "glbinding")
         os.unlink(zip_name)
 
     def build(self):

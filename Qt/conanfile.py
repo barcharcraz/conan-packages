@@ -9,6 +9,8 @@ class QtConan(ConanFile):
     version = "5.9.1"
     description = "Qt GUI toolkit and library"
     license = "LGPL"
+    url = "https://github.com/barcharcraz/conan-packages"
+
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False]}
     default_options = "shared=False"
