@@ -62,10 +62,10 @@ class QtConan(ConanFile):
             if self.settings.compiler == "Visual Studio":
                 self.run(f"{cmd} && cd Qt && ..\jom.exe")
             else:
-                self.run(f"{cmd} && cd Qt && make")
+                self.run(f"{cmd} && cd Qt && make -j16")
         else:
             self.run(f"cd qt && ./configure {' '.join(args)}")
-            self.run(f"cd qt && make")
+            self.run(f"cd qt && make -j16")
 
     def package(self):
         if self.settings.compiler == "Visual Studio":
