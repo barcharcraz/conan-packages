@@ -15,18 +15,25 @@ class TriangleConan(ConanFile):
     exports = "CMakeLists.txt"
     default_options = "shared=False"
     generators = "cmake"
+
+    _source_subfolder = "triangle"
+    _build_subfolder = "triangle_build"
+
+    def _configure_cmake(self):
+        cmake = CMake(self)
+        cmake.configure(build_folder=self._build_subfolder)
+        return cmake
+
     def source(self):
         self.run("git clone https://github.com/libigl/triangle.git")
         self.run("git -C triangle checkout d6761dd691e2e1318c83bf7773fea88d9437464a")
         # OK this one was a big huuuuge fuck you moment for me.
         # like can we just never do this ever again in the world
     def build(self):
-        cmake = CMake(self.settings)
-        args = [f'-DCMAKE_INSTALL_PREFIX="{self.package_folder}"',
-                f"-DBUILD_SHARED_LIBS={self.options.shared}"
-                ]
-        self.run(f"cmake . {cmake.command_line} {' '.join(args)}")
-        self.run(f"cmake --build . {cmake.build_config}")
+        cmake = self._configure_cmake()
+        cmake.build()
     def package(self):
-        cmake = CMake(self.settings)
-        self.run(f"cmake --build . --target install {cmake.build_config}")
+        cmake = self._configure_cmake()
+        cmake.install()
+    def package_info(self):
+        self.cpp_info.libs = tools.collect_libs(self)
