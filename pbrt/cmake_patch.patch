@@ -1,0 +1,34 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index e615e51..f8dcaf9 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -5,7 +5,7 @@
+ CMAKE_MINIMUM_REQUIRED ( VERSION 2.8.4 )
+ 
+ # For sanitizers
+-SET (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
++SET (CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake" ${CMAKE_MODULE_PATH})
+ 
+ PROJECT ( PBRT-V3 )
+ 
+@@ -321,8 +321,8 @@ INCLUDE_DIRECTORIES (
+   src/ext/openexr/IlmBase/Half
+   src/ext/openexr/IlmBase/Iex
+   src/ext/openexr/OpenEXR/IlmImf
+-  ${CMAKE_BINARY_DIR}/src/ext/openexr/IlmBase/config
+-  ${CMAKE_BINARY_DIR}/src/ext/openexr/OpenEXR/config
++  ${CMAKE_CURRENT_BINARY_DIR}/src/ext/openexr/IlmBase/config
++  ${CMAKE_CURRENT_BINARY_DIR}/src/ext/openexr/OpenEXR/config
+ )
+ IF(WIN32)
+   SET(OPENEXR_LIBS IlmImf Imath Half ${ZLIB_LIBRARY})
+@@ -342,7 +342,7 @@ ADD_SUBDIRECTORY(src/ext/glog)
+ SET_PROPERTY(TARGET glog logging_unittest demangle_unittest utilities_unittest stl_logging_unittest PROPERTY FOLDER "ext")
+ INCLUDE_DIRECTORIES (
+   src/ext/glog/src
+-  ${CMAKE_BINARY_DIR}/src/ext/glog
++  ${CMAKE_CURRENT_BINARY_DIR}/src/ext/glog
+ )
+ 
+ ###########################################################################
+
