@@ -3,3 +3,9 @@ __pycache__
 .vscode
 .vs
 .idea
+
+source_subfolder/
+build_subfolder/
+conanbuildinfo.cmake
+conanbuildinfo.txt
+conaninfo.txt
