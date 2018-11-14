@@ -12,10 +12,12 @@ class GlfwConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     options = {
         "shared": [True, False],
+        "fPIC": [True, False],
         "compiler_launcher": [None, "sccache", "ccache"]
     }
     default_options = {
         "shared": False,
+        "fPIC": True,
         "compiler_launcher": None
     }
     generators = "cmake"
