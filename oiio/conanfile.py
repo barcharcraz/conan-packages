@@ -38,7 +38,6 @@ class OpenimageioConan(ConanFile):
 
     def _configure_cmake(self):
         cmake = CMake(self)
-        cmake.configure(build_folder=self._build_subfolder)
         cmake.definitions["BUILDSTATIC"] = self.options.shared
         cmake.definitions["EMBEDPLUGINS"] = False
         cmake.definitions["USE_DICOM"] = False
@@ -59,6 +58,8 @@ class OpenimageioConan(ConanFile):
         cmake.definitions["USE_QT"] = False
         cmake.definitions["USE_SIMD"] = "0"
         cmake.definitions["USE_fPIC"] = self.options.fPIC
+        cmake.configure(build_folder=self._build_subfolder)
+
         return cmake
 
     def build(self):
