@@ -7,6 +7,7 @@ class GlfwConan(ConanFile):
     name = "glfw"
     version = "3.2.1"
     license = "zlib"
+    homepage = "www.glfw.org"
     description = "an Open Source, multi-platform library for OpenGL, OpenGL ES and Vulkan development on the desktop"
     url = "https://github.com/barcharcraz/conan-packages"
     settings = "os", "compiler", "build_type", "arch"
@@ -45,6 +46,19 @@ class GlfwConan(ConanFile):
     def _configure_cmake(self):
         cmake = CMake(self)
         cmake.definitions["CMAKE_VERBOSE_MAKEFILE"] = True
+        cmake.definitions["GLFW_BUILD_DOCS"] = False
+        cmake.definitions["GLFW_BUILD_EXAMPLES"] = False
+        cmake.definitions["GLFW_BUILD_TESTS"] = False
+        cmake.definitions["GLFW_DOCUMENT_INTERNALS"] = False
+        cmake.definitions["GLFW_USE_HYBRID_HPG"] = False
+        cmake.definitions["GLFW_VULKAN_STATIC"] = False
+        if (self.settings.compiler.runtime == "MD" or 
+            self.settings.compiler.runtime == "MDd"):
+            cmake.definitions["USE_MSVC_RUNTIME_LIBRARY_DLL"] = True
+        else:
+            cmake.definitions["USE_MSVC_RUNTIME_LIBRARY_DLL"] = False
+
+        cmake.definitions["USE_MSVC_RUNTIME_DLL"] = True
         if(self.options.compiler_launcher):
             cmake.definitions["CMAKE_CXX_COMPILER_LAUNCHER"] = self.options.compiler_launcher
             cmake.definitions["CMAKE_C_COMPILER_LAUNCHER"] = self.options.compiler_launcher
