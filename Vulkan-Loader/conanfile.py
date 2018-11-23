@@ -14,8 +14,6 @@ class VulkanLoaderConan(ConanFile):
     exports = ["LICENSE.txt"]
     exports_sources = "CMakeLists.txt"
 
-    requires = "Vulkan-Headers/{}@bartoc/testing".format(version)
-
     _source_subfolder = "source_subfolder"
     _build_subfolder = "build_subfolder"
 
@@ -47,6 +45,9 @@ class VulkanLoaderConan(ConanFile):
     }
     default_channel = "testing"
     default_user = "bartoc"
+
+    def requirements(self):
+        self.requires(f"Vulkan-Headers/{self.version}@{self.user}/{self.channel}")
 
     def source(self):
         source_url = "https://github.com/KhronosGroup/Vulkan-Loader"
@@ -83,7 +84,7 @@ class VulkanLoaderConan(ConanFile):
     def package(self):
         cmake = self._configure_cmake()
         cmake.install()
-        
+
     def package_info(self):
         self.cpp_info.libs = tools.collect_libs(self)
     
