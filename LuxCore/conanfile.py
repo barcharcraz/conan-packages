@@ -4,7 +4,7 @@ import os
 
 class LuxcoreConan(ConanFile):
     name = "LuxCore"
-    version = "2.1beta1"
+    version = "2.1beta3"
     license = "Apache 2.0"
     author = "Charles Barto <bartoc@umich.edu>"
     url = "https://github.com/barcharcraz/conan-packages"
@@ -14,14 +14,16 @@ class LuxcoreConan(ConanFile):
     options = {"shared": [True, False]}
     default_options = "shared=False"
     generators = "cmake"
-
+    requires = (
+        "boost/[>=1.56.0]@conan/stable"
+    )
     _source_subfolder = "source_subfolder"
     _build_subfolder = "build_subfolder"
 
     def source(self):
         source_url = "https://github.com/LuxCoreRender/LuxCore"
         tools.get("{0}/archive/luxcorerender_v{1}.tar.gz".format(source_url, self.version), 
-            sha256="ad3e23f70a132b37dbaaa63e212f6287b6af77d69b29ba7d919ab747ee4dd30d")
+            sha256="4a6c9b0dea6b29a4ae758d8b120d8fd1175ec6fb5ad2a9cb1ed4306b1cc274e4")
         extracted_dir = self.name + "-" + "luxcorerender_v" + self.version
 
         os.rename(extracted_dir, self._source_subfolder)
