@@ -1,6 +1,7 @@
 #include <iostream>
-#include "hello.h"
+#include <OpenImageIO/oiioversion.h>
+#include <cstdlib>
 
 int main() {
-    hello();
+    return EXIT_SUCCESS;
 }

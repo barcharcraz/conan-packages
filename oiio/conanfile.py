@@ -10,6 +10,7 @@ class OpenimageioConan(ConanFile):
     description = "Open Image IO library"
     topics = ("graphics", "images", "IO")
     settings = "os", "compiler", "build_type", "arch"
+    exports_sources = ["CMakeLists.txt"]
     options = {
         "shared": [True, False],
         "fPIC": [True, False]
@@ -84,7 +85,6 @@ class OpenimageioConan(ConanFile):
         cmake.definitions["USE_QT"] = False
         cmake.definitions["USE_SIMD"] = "0"
         cmake.definitions["USE_fPIC"] = self.options.fPIC
-        print(self.options["boost"].shared)
         cmake.definitions["LINKSTATIC"] = not self.options["boost"].shared
         cmake.configure(build_folder=self._build_subfolder)
         
