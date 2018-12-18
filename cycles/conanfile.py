@@ -36,6 +36,14 @@ class CyclesConan(ConanFile):
     
     def _configure_cmake(self):
         cmake = CMake(self)
+        cmake.definitions["WITH_CPU_SSE"] = True
+        cmake.definitions["WITH_CUDA_DYNLOAD"] = False
+        cmake.definitions["WITH_CYCLES_CUDA_BINARIES"] = False
+        cmake.definitions["WITH_CYCLES_DEBUG"] = False
+        cmake.definitions["WITH_CYCLES_LOGGING"] = False
+        cmake.definitions["WITH_CYCLES_OSL"] = False
+        cmake.definitions["WITH_CYCLES_STANDALONE_GUI"] = False
+        cmake.definitions["CYCLES_STANDALONE_REPOSITORY"] = False
         cmake.configure(build_folder=self._build_subfolder)
         return cmake
     
