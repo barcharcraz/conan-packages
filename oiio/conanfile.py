@@ -87,18 +87,12 @@ class OpenimageioConan(ConanFile):
         cmake.definitions["USE_fPIC"] = self.options.fPIC
         cmake.definitions["LINKSTATIC"] = not self.options["boost"].shared
         cmake.configure(build_folder=self._build_subfolder)
-        
 
         return cmake
 
     def build(self):
         cmake = self._configure_cmake()
         cmake.build()
-
-        # Explicit way:
-        # self.run('cmake %s/hello %s'
-        #          % (self.source_folder, cmake.command_line))
-        # self.run("cmake --build . %s" % cmake.build_config)
 
     def package(self):
         cmake = self._configure_cmake()
