@@ -16,7 +16,7 @@ class CGALConanFile(ConanFile):
         ("Boost/1.64.0b2@barcharcraz/testing")
     )
     generators = "cmake"
-    exports = "CMakeLists.txt"
+    exports_sources = "CMakeLists.txt"
     url = "https://github.com/barcharcraz/conan-packages"
 
 

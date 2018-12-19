@@ -9,8 +9,22 @@ class PythonConan(ConanFile):
     url = "https://github.com/barcharcraz/conan-packages"
     description = "The python programming language"
     settings = "os", "build_type", "arch", "compiler"
+
+    default_channel = "testing"
+    default_user = "bartoc"
+
+
     _source_subfolder = "source_subfolder"
     _build_subfolder = "build_subfolder"
+
+    options = {
+        "shared": [True, False],
+        "fPIC": [True, False]
+    }
+    default_options = {
+        "shared": False,
+        "fPIC": True
+    }
 
     def source(self):
         source_url = f"https://www.python.org/ftp/python/{self.version}/Python-{self.version}.tgz"
@@ -19,8 +33,14 @@ class PythonConan(ConanFile):
         extracted_dir = f"Python-{self.version}"
         os.rename(extracted_dir, self._source_subfolder)
 
+        
+        tools.patch(base_path=self._source_subfolder, patch_file="0005-Fix-DefaultWindowsSDKVersion.patch")
+        
+
     def build(self):
         if self.settings.compiler == "Visual Studio":
+            if not self.options.shared:
+                tools.patch(base_path=self._source_subfolder, patch_file="0001_Static_Library.patch")
             msbuild = MSBuild(self)
             msbuild.build(f"{self._source_subfolder}/PCBuild/pythoncore.vcxproj",
                           targets=["Build"],
@@ -28,4 +48,5 @@ class PythonConan(ConanFile):
                           properties={
                               "IncludeExternals": "false",
                               "IncludeSSL": "false",
-                              "IncludeTkinter": "false"})
+                              "IncludeTkinter": "false",
+                              "KillPython": "false"})
