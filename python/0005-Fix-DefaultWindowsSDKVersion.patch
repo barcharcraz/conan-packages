@@ -1,12 +1,12 @@
 diff --git a/PCbuild/python.props b/PCbuild/python.props
+index 09f11d3bba..6ce022a559 100644
 --- a/PCbuild/python.props
 +++ b/PCbuild/python.props
-@@ -76,7 +76,7 @@
-    -->
-    <_RegistryVersion>$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SDKs\Windows\v10.0@ProductVersion)</_RegistryVersion>
-    <_RegistryVersion Condition="$(_RegistryVersion) == ''">$(Registry:HKEY_LOCAL_MACHINE\WOW6432Node\SOFTWARE\Microsoft\Microsoft SDKs\Windows\v10.0@ProductVersion)</_RegistryVersion>
--    <DefaultWindowsSDKVersion>10.0.15063.0</DefaultWindowsSDKVersion>
-+    <DefaultWindowsSDKVersion Condition="$(_RegistryVersion) == '10.0.15063'">10.0.15063.0</DefaultWindowsSDKVersion>
-    <DefaultWindowsSDKVersion Condition="$(_RegistryVersion) == '10.0.14393'">10.0.14393.0</DefaultWindowsSDKVersion>
-    <DefaultWindowsSDKVersion Condition="$(_RegistryVersion) == '10.0.10586'">10.0.10586.0</DefaultWindowsSDKVersion>
-    <DefaultWindowsSDKVersion Condition="$(_RegistryVersion) == '10.0.10240'">10.0.10240.0</DefaultWindowsSDKVersion>
+@@ -77,7 +77,6 @@
+     -->
+     <_RegistryVersion>$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SDKs\Windows\v10.0@ProductVersion)</_RegistryVersion>
+     <_RegistryVersion Condition="$(_RegistryVersion) == ''">$(Registry:HKEY_LOCAL_MACHINE\WOW6432Node\SOFTWARE\Microsoft\Microsoft SDKs\Windows\v10.0@ProductVersion)</_RegistryVersion>
+-    <DefaultWindowsSDKVersion>10.0.17134.0</DefaultWindowsSDKVersion>
+     <DefaultWindowsSDKVersion Condition="$(_RegistryVersion) == '10.0.16299'">10.0.16299.0</DefaultWindowsSDKVersion>
+     <DefaultWindowsSDKVersion Condition="$(_RegistryVersion) == '10.0.15063'">10.0.15063.0</DefaultWindowsSDKVersion>
+     <DefaultWindowsSDKVersion Condition="$(_RegistryVersion) == '10.0.14393'">10.0.14393.0</DefaultWindowsSDKVersion>
