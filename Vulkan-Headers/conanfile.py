@@ -7,7 +7,7 @@ import os
 
 class VulkanHeadersConan(ConanFile):
     name = "Vulkan-Headers"
-    version = "1.1.85.0"
+    version = "1.1.114.0"
     url = "https://github.com/barcharcraz/conan-packages"
     author = "Charles Barto <bartoc@umich.edu>"
     description = "Headers for Vulkan"
@@ -30,15 +30,12 @@ class VulkanHeadersConan(ConanFile):
     def source(self):
         source_url = "https://github.com/KhronosGroup/Vulkan-Headers"
         tools.get("{0}/archive/sdk-{1}.tar.gz".format(source_url, self.version),
-            sha256="d3c6435d101bb9271019c9d0dd159e210a805958dda3bb13344fce9316c6d098")
+            sha256="701cc5391c5c757b48f0b8bc6944586c3d479cff7e1803acac9f59c11e9cebf2")
         extracted_dir = "Vulkan-Headers-sdk-" + self.version
         
 
         #Rename to "source_folder" is a convention to simplify later steps
         os.rename(extracted_dir, self._source_subfolder)
-
-        tools.replace_in_file("source_subfolder/CMakeLists.txt",
-            r"${CMAKE_SOURCE_DIR}", r"${CMAKE_CURRENT_SOURCE_DIR}")
 
 
     def _configure_cmake(self):
