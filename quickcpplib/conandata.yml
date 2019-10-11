@@ -1,0 +1,5 @@
+'20191011':
+  source:
+    url: "https://github.com/ned14/quickcpplib/archive/7b6c52c13e54052a340e45a243ebade842c871d1.zip"
+    sha256: "3558c19106d1817de25510632ab0740719bae09d52a7c83583b1c14f17cce241"
+  foldername: "quickcpplib-7b6c52c13e54052a340e45a243ebade842c871d1"
