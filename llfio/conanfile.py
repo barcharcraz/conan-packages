@@ -1,5 +1,6 @@
 from conans import ConanFile, CMake, tools
 import os
+import pathlib
 class LLFIOConanfile(ConanFile):
     name = 'llfio'
     description = 'P1031 low level file i/o and filesystem library for the C++ standard'
@@ -17,10 +18,13 @@ class LLFIOConanfile(ConanFile):
     def requirements(self):
         self.requires(f"quickcpplib/20191011-master@{self.user}/{self.channel}")
         self.requires(f"outcome/2.1.1@{self.user}/{self.channel}")
+        self.requires(f"ntkernel-error-category/20191011@{self.user}/{self.channel}")
     def source(self):
         tools.get(**self.conan_data[self.version]["source"])
         extracted_dir = self.conan_data[self.version]["foldername"]
         os.rename(extracted_dir, self._source_subfolder)
+        src_path = pathlib.Path(self._source_subfolder)
+        tools.replace_in_file(src_path / "CMakeLists.txt", 'add_subdirectory("include/llfio/ntkernel-error-category" EXCLUDE_FROM_ALL)', '')
 
     def _configure_cmake(self):
         cmake = CMake(self)
