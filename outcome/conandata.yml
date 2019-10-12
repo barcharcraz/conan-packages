@@ -1,0 +1,5 @@
+'2.1.1':
+  source:
+    url: "https://github.com/ned14/outcome/archive/v2.1.1.tar.gz"
+    sha256: "b22bc08f185fe5c0ca945c5f3b8db144b4dfd6f1dfb1ee21195f29080a5158a0"
+  foldername: "outcome-2.1.1"
