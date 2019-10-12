@@ -1,0 +1,11 @@
+'20191011-master':
+  source:
+    url: "https://github.com/ned14/quickcpplib/archive/7b6c52c13e54052a340e45a243ebade842c871d1.zip"
+    sha256: "3558c19106d1817de25510632ab0740719bae09d52a7c83583b1c14f17cce241"
+  foldername: "quickcpplib-7b6c52c13e54052a340e45a243ebade842c871d1"
+
+'20191011-wip':
+  source:
+    url: "https://github.com/ned14/quickcpplib/archive/17cdb1157a50035923d210de8154b0aecee27f07.zip"
+    sha256: "eaf64b4225045fcaf1b4c62806f0923f4ca34ea6b762cd3334745a85dae97d7d"
+  foldername: "quickcpplib-17cdb1157a50035923d210de8154b0aecee27f07"

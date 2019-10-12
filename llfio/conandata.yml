@@ -1,0 +1,10 @@
+'2.0':
+  source:
+    url: https://dedi5.nedprod.com/static/files/llfio-v2.0-source-latest.tar.xz
+    sha256: "879d1cf2e8c0d639e8793aa63f1abd7de7c2c12f5f59917dae8f49c25b9904de"
+  foldername: "llfio"
+'20191011':
+  source:
+    url: "https://github.com/ned14/llfio/archive/19963a5e98a0441194015450929dfa7918c951f2.zip"
+    sha256: "cd4c0708b02079d9177ede0e17bda6ff946edf349be8f321513359c8bbc22e88"
+  foldername: "llfio-19963a5e98a0441194015450929dfa7918c951f2"
