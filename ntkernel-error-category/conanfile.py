@@ -27,11 +27,14 @@ class NtKernelErrorCategoryConan(ConanFile):
         extracted_dir = self.conan_data[self.version]["foldername"]
         os.rename(extracted_dir, self._source_subfolder)
         src_path = pathlib.Path(self._source_subfolder)
+        for f in src_path.glob("**/CMakeLists.txt"):
+            tools.replace_in_file(f, "CMAKE_BINARY_DIR", "PROJECT_BINARY_DIR", strict=False)
         for f in src_path.glob("**/*.cmake*"):
             tools.replace_in_file(f, "CMAKE_BINARY_DIR", "PROJECT_BINARY_DIR", strict=False)
+        tools.replace_in_file(src_path / "CMakeLists.txt", 'install(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}FixupInstall.cmake")', "")
 
     def _configure_cmake(self):
-        cmake = CMake(self)
+        cmake = CMake(self, generator="Ninja")
         cmake.configure(build_folder=self._build_subfolder)
         return cmake
     
