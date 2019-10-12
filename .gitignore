@@ -13,3 +13,4 @@ conaninfo.txt
 graph_info.json
 .mypy_cache
 *.props
+conan.lock

@@ -1,10 +1,10 @@
 from conans import ConanFile, CMake, tools
 import os
-class LLFIOConanfile(ConanFile):
-    name = 'llfio'
-    description = 'P1031 low level file i/o and filesystem library for the C++ standard'
+class NtKernelErrorCategoryConan(ConanFile):
+    name = 'ntkernel-error-category'
+    description = "A C++ 11 std::error_category for the NT kernel's NTSTATUS error codes"
     url = 'https://github.com/barcharcraz/conan-packages'
-    homepage = 'https://github.com/ned14/llfio'
+    homepage = 'https://github.com/ned14/ntkernel-error-category'
     license = 'Apache-2.0'
     exports_sources = ["CMakeLists.txt"]
     generators = 'cmake'
@@ -14,9 +14,7 @@ class LLFIOConanfile(ConanFile):
     _source_subfolder = 'source_subfolder'
     _build_subfolder = 'build_subfolder'
     settings = 'os', 'arch', 'compiler', 'build_type'
-    def requirements(self):
-        self.requires(f"quickcpplib/20191011-master@{self.user}/{self.channel}")
-        self.requires(f"outcome/2.1.1@{self.user}/{self.channel}")
+
     def source(self):
         tools.get(**self.conan_data[self.version]["source"])
         extracted_dir = self.conan_data[self.version]["foldername"]

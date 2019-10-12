@@ -1,0 +1,6 @@
+'20191011':
+  source:
+    url: "https://github.com/ned14/ntkernel-error-category/archive/2a6d4d320ee3df3921d6fd3562f0fc593b1823f3.zip"
+    sha256: "28b3931189c41a89722a2988bd152e42d91de2f4b5c2640096f3be1be2987595"
+  foldername: "ntkernel-error-category-2a6d4d320ee3df3921d6fd3562f0fc593b1823f3"
+
