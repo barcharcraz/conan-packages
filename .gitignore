@@ -6,6 +6,7 @@ __pycache__
 
 source_subfolder/
 build_subfolder/
+package/
 build/
 conanbuildinfo.cmake
 conanbuildinfo.txt
